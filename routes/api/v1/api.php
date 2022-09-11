@@ -26,7 +26,6 @@ Route::group(['prefix' => 'cm'], function () {
     Route::post('/login', [LoginController::class, 'login']);
 });
 
-
 //Route::prefix('/cm')->group( function(){
 //    Route::post('/login', [LoginController::class, 'login']);
 //});
