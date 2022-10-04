@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CrewController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'cm'], function () {
     Route::post('/login', [LoginController::class, 'login']);
+
+
+//api resource
+
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('/logout', [LoginController::class, 'logout']);
+        Route::apiResources([  //
+                               'crew' => CrewController::class,  //GET. POST, PATCH, UPDATE , DELETE
+        ]);
+    });
 });
 
 //Route::prefix('/cm')->group( function(){

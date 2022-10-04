@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Models\HttpCode;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -30,6 +32,28 @@ class LoginController extends Controller
             'user' => $user
         ]);
 
+    }
+
+    public function logout(Request $request)
+    {
+//        $request->user()->token()->revoke();
+//        return response()->json(['message' => 'Successfully logged out']);
+
+//        $token = $request->user()->token();
+//        $token->revoke();
+//        return response()->json([
+//            'success' => 'Sucessfully Logout'
+//        ]);
+
+
+        if ($request->user()) {
+            $request->user()->tokens()->delete();
+        }
+
+        return response()->json(['success' => 'Sucessfully Logout'], 200);
+
 
     }
+
+
 }
